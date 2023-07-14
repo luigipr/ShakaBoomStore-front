@@ -36,20 +36,30 @@ export default function SignInPage() {
 
 
   return (
-    <SingInContainer>
-      <form onSubmit={logUser}>
-        <ShakaboomLogo />
-        <input placeholder="E-mail" data-test="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-        <input placeholder="Senha" data-test="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-        <button data-test="sign-in-submit">Entrar</button>
-      </form>
+    <LoginSingUpContainer >
+      <SingInContainer>
+        <form onSubmit={logUser}>
+          <ShakaboomLogo />
+          <input placeholder="E-mail" data-test="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+          <input placeholder="Senha" data-test="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <button data-test="sign-in-submit">Entrar</button>
+        </form>
 
-      <Link to={'/cadastro'}>
-        Primeira vez? Cadastre-se!
-      </Link>
-    </SingInContainer>
+        <Link to={'/cadastro'}>
+          Primeira vez? Cadastre-se!
+        </Link>
+      </SingInContainer>
+    </LoginSingUpContainer>
   )
 }
+
+const LoginSingUpContainer = styled.main`
+  background-color: #5BAF50;
+  width: calc(100vw - 65px);
+  max-height: 100vh;
+  padding: 25px;
+`
+
 
 const SingInContainer = styled.section`
   height: 100vh;
