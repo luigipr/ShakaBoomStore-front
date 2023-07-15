@@ -5,17 +5,23 @@ import trash from "../assets/trash.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { createConfig } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 export default function ShoppingCartPage(){
     const [carrinho, setCarrinho] = useState([]);
     const [deleted, setDeleted] = useState(false);
-    const BASE_URL = import.meta.env.VITE_API_URL
+    const BASE_URL = import.meta.env.VITE_API_URL;
     const user = JSON.parse(localStorage.getItem("user"));
     const token = JSON.parse(localStorage.getItem("token"));
-    console.log(token)
+
+    const navigate = useNavigate();
+
+
 
     function deletarProduto(productId){
-        const url = `${BASE_URL}/shoppingcart/${productId}`;
+        const confirmacaoDeDelecao = confirm('Tem certeza que deseja excluir este produto do seu carrinho de compras?');
+        if(confirmacaoDeDelecao){
+            const url = `${BASE_URL}/shoppingcart/${productId}`;
         const headers = createConfig(token);
         axios.delete(url, headers)
             .then(resp => {
@@ -29,7 +35,17 @@ export default function ShoppingCartPage(){
             .catch(err => {
                 console.log(err.response.data);
             })
+        }  
     }
+
+    function goToCheckout(){
+        if(carrinho.length === 0){
+            alert('Não há nenhum produto no carrinho, adicione produtos para finalizar a compra')
+        }else{
+            navigate('/checkout');
+        }   
+    }
+
     useEffect(() => {
         const url = `${BASE_URL}/shoppingcart`;
         const headers = createConfig(token);
@@ -42,24 +58,38 @@ export default function ShoppingCartPage(){
                 console.log(err.response.data)
             })
     }, [deleted])
+
+    if(carrinho.length ===0 ){
+        return(
+            <>
+                <ShoppingCartHeader />
+                <ShoppingCartContainer>
+                    <Texto>Você ainda não adicionou nada ao carrinho</Texto>
+                    <BackButton onClick={() => navigate('/')}>
+                        Escolher produtos
+                    </BackButton>
+                </ShoppingCartContainer>
+            </>
+        )
+    }
     return(
         <>
         <ShoppingCartHeader />
         <ShoppingCartContainer>
-        
+            
             {carrinho.map(produto => (
-                <ProductContainer key = {produto.productId}>
+                <ProductContainer key = {produto._id}>
                     <img src = {produto.productImage} />
                     <InfoContainer>
                         <p><strong>Descrição: </strong>{produto.description}</p>
-                        <p><strong>Preço: </strong>{produto.price}</p>
+                        <p><strong>Preço: </strong>R$ {produto.price.toFixed(2).toString().replace('.',',')}</p>
                         <p><strong>Quantidade: </strong>{produto.quantity}</p>
                         <img src = {trash} onClick={() => deletarProduto(produto.productId)}/>
                     </InfoContainer>
                 </ProductContainer>)
             )} 
 
-            <BuyButton>
+            <BuyButton onClick={goToCheckout}>
                 Comprar
             </BuyButton>
 
@@ -69,18 +99,30 @@ export default function ShoppingCartPage(){
     );
 }
 
+
+const Texto = styled.p`
+    font-size: 30px;
+    color: gray;
+    margin-top: 180px;
+    margin-bottom: 70px;
+    padding: 5%;
+    text-align: center;
+`
 const ShoppingCartContainer = styled.div`
+    background-color: #c5e8c5;
     width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 60px;
+    overflow-y: scroll;
+    padding-bottom: 60px;
+    padding-top: 60px;
 `
 
 const ProductContainer = styled.div`
-    background-color: #c5e8c5;
+    background-color: white;
     width: 90%;
     border-radius: 15px;
     margin-top: 10px;
@@ -112,11 +154,11 @@ const InfoContainer = styled.div`
     p{
         margin: 4px;
         margin-top: 15px;
-        padding-right: 16px;
+        margin-right: 30px;
     }
     img{
         position: absolute;
-        top: 2px;
+        top: -9px;
         right: 2px;
         width: 16px;
         height: 19px;
@@ -130,4 +172,12 @@ const BuyButton = styled.button`
     border: none;
     position: fixed;
     bottom: 15px;
+`
+
+const BackButton = styled.button`
+    background-color: orange;
+    color: black;
+    width: 200px;
+    border-radius: 25px;
+    border: none;
 `
