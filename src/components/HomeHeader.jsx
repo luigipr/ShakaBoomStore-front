@@ -1,11 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import shoppingcart from "../assets/shoppingcart.png";
+import { Link } from "react-router-dom";
 
 export default function HomeHeader(){
     const user = JSON.parse(localStorage.getItem("user"));
 
     const navigate = useNavigate();
+
+    console.log(user);
+    if(!user){
+        return (
+            <HeaderContainer>
+                <div onClick = {() => navigate('/login')}>Conecte-se</div>
+            <img src = {shoppingcart} onClick={() => navigate('/carrinho')}/>
+            </HeaderContainer>
+        )
+
+    }
     
     return(
         <HeaderContainer>

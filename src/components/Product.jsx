@@ -88,6 +88,7 @@ const InfoContainer = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     position: relative;
+    margin-bottom: 10px;
     p{
         margin: 4px;
         margin-top: 15px;
