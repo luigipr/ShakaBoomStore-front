@@ -27,7 +27,7 @@ export default function SignInPage() {
     
     console.log(response.data);
     login(response.data.token);
-    setUser(response.data.username);
+    localUser(response.data.username);
     // navegar para pagina de entrada
     navigate('/');
     });
