@@ -93,7 +93,7 @@ export default function ShoppingCartPage(){
                 Comprar
             </BuyButton>
 
-            </ShoppingCartContainer>
+        </ShoppingCartContainer>
        
         </>
     );

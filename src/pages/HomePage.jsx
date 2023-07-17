@@ -23,14 +23,11 @@ const Esp = styled.div`
 
 const ProductsContainer = styled.div`
     height: 100vh;
+    width: 100%;
     background-color: rgba(0, 188, 0, 0.2); 
     display:flex;
-    flex-wrap:wrap;
     flex-direction: column;
     align-items: center;
-    overflow-y:scroll;
+    overflow-y: scroll;
     padding-top: 70px;
-    ::-webkit-scrollbar{
-        display: none;
-    }
 `
