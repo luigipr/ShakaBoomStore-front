@@ -2,12 +2,18 @@ import styled from "styled-components"
 import { FaUserCircle } from "react-icons/fa"
 import { FaBasketShopping } from "react-icons/fa6"
 import Product from "../components/Product"
+import { useNavigate } from "react-router-dom"
 
 export default function homepage() {
+    const username = localStorage.getItem('user');
+    const navigate = useNavigate();
+
+
+
     return (
         <>
             <Header>
-                <Holder><FaUserCircle style={style} /> Nome</Holder>
+                <Holder><FaUserCircle style={style} /> {username ? username : <button onClick={() => { navigate('/login') }}>Faça Login</button>}</Holder>
                 <FaBasketShopping style={style} />
             </Header>
             <ProductsContainer>
@@ -18,11 +24,6 @@ export default function homepage() {
                     <Category>Notebooks</Category>
                     <Category>Fone</Category>
                 </Holder>
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
                 <Product />
             </ProductsContainer>
         </>)
