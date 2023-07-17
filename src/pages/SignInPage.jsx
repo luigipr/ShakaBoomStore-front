@@ -56,7 +56,7 @@ export default function SignInPage() {
 
 const LoginSingUpContainer = styled.main`
   background-color: #5BAF50;
-  width: calc(100vw - 65px);
+  width: 100vw;
   max-height: 100vh;
   padding: 25px;
 `

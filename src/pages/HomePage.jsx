@@ -1,81 +1,35 @@
 import styled from "styled-components"
-import { FaUserCircle } from "react-icons/fa"
-import { FaBasketShopping } from "react-icons/fa6"
 import Product from "../components/Product"
 import { useNavigate } from "react-router-dom"
+import HomeHeader from "../components/HomeHeader";
 
 export default function homepage() {
-    const username = localStorage.getItem('user');
+    const username = JSON.parse(localStorage.getItem("user"));
     const navigate = useNavigate();
-
-
 
     return (
         <>
-            <Header>
-                <Holder><FaUserCircle style={style} /> {username ? username : <button onClick={() => { navigate('/login') }}>Faça Login</button>}</Holder>
-                <FaBasketShopping style={style} />
-            </Header>
+            <HomeHeader/>
             <ProductsContainer>
-                <Holder>
-                    <Category>Mouse</Category>
-                    <Category>Teclado</Category>
-                    <Category>Computadores</Category>
-                    <Category>Notebooks</Category>
-                    <Category>Fone</Category>
-                </Holder>
                 <Product />
             </ProductsContainer>
         </>)
 }
 
-const style = {
-    fontSize: "45px",
-    color: "#41ca41",
-    marginLeft: "20px",
-    marginRight: "20px"
-}
-
-const Header = styled.div`
-    width : 100vw;
-    height : 13vh;
-    display: flex;
-    justify-content: space-between;
-    align-items:center;
-    margin-bottom: 1px solid rgba(0,0,0,1);
-`
-
-const Holder = styled.div`
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    overflow-y:scroll;
-    ::-webkit-scrollbar{
-        display: none;
-    }
-`
-
-const Category = styled.button`
-    background-color:#41ca41;
-    width: 30vw;
-    height: 50px;
-    margin-right: 20px;
-    margin-left: 10px;
-    margin-top: 20px; 
-    border-radius:10px;
-    color: white;   
-    font-size: 15px;
-    filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.25));
-    border-bottom: 1px solid rgba(0,0,0,0.5);
+const Esp = styled.div`
+    height: 45px;
+    width: 100%;
 `
 
 const ProductsContainer = styled.div`
-    height: 77.1vh;
+    height: 100vh;
     background-color: rgba(0, 188, 0, 0.2); 
-    border-top: 2px solid green;
     display:flex;
     flex-wrap:wrap;
+    flex-direction: column;
+    align-items: center;
     overflow-y:scroll;
+    padding-top: 70px;
     ::-webkit-scrollbar{
         display: none;
     }
