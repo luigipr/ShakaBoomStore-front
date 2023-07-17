@@ -40,7 +40,7 @@ export default function SignUpPage() {
           <button data-test="sign-up-submit" >Cadastrar</button>
         </form>
 
-        <Link to={'/'}>
+        <Link to={'/login'}>
           Já tem uma conta? Entre agora!
         </Link>
       </SingUpContainer>
