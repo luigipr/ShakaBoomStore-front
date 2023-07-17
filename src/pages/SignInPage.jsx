@@ -25,8 +25,9 @@ export default function SignInPage() {
 
     promise.then( response => {
     
+    console.log(response.data);
     login(response.data.token);
-    localUser(response.data.user);
+    setUser(response.data.username);
     // navegar para pagina de entrada
     navigate('/');
     });

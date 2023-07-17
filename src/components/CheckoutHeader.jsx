@@ -3,7 +3,7 @@ import styled from "styled-components";
 import home from "../assets/home-transparente.png";
 
 
-export default function ShoppingCartHeader() {
+export default function CheckoutHeader() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ export default function ShoppingCartHeader() {
 }
 
 const HeaderContainer = styled.div`
-    background-color: white;
+    background-color: #aff8a6;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     width: 100%;
     height: 60px;

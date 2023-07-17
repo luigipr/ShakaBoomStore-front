@@ -41,7 +41,7 @@ const Header = styled.div`
     display: flex;
     justify-content: space-between;
     align-items:center;
-    margin-bottom: 1px solid rgba(0,0,0,1)
+    margin-bottom: 1px solid rgba(0,0,0,1);
 `
 
 const Holder = styled.div`
@@ -65,7 +65,7 @@ const Category = styled.button`
     color: white;   
     font-size: 15px;
     filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.25));
-    border-bottom: 1px solid rgba(0,0,0,0.5)
+    border-bottom: 1px solid rgba(0,0,0,0.5);
 `
 
 const ProductsContainer = styled.div`
