@@ -1,11 +1,27 @@
 import styled from "styled-components";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function Product() {
+    const [products, setProducts] = useState();
+    const url = import.meta.env.VITE_API_URL
+
+    useEffect(() => {
+        const promise = axios.get(`${url}/getProducts`)
+        promise.then((res) => { setProducts(res.data) })
+        promise.catch((err) => { console.log(err) })
+    }, [])
+
     return (
-        <ProductHolder>
-            <ProductImage src="https://blog.abler.com.br/wp-content/uploads/2021/06/teste-de-perfil-comportamental-1-e1660663169829.jpg"/>
-            <h1>Teste</h1>
-        </ProductHolder>
+        <>
+            {products && products.map((product, index) => (
+                <ProductHolder key={index}>
+                    <ProductImage src={product.productImage} />
+                    <h1>{product.description}</h1>
+                </ProductHolder>
+            ))}
+        </>
     )
 }
 
