@@ -27,7 +27,8 @@ export default function SignInPage() {
     
     console.log(response.data);
     login(response.data.token);
-    setUser(response.data.username);
+    //estava setUser, mas deve ser localUser para o salvamento no local host ser feito da forma correta
+    localUser(response.data.username);
     // navegar para pagina de entrada
     navigate('/');
     });
